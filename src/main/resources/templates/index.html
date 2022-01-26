@@ -1,0 +1,116 @@
+<!Doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MyBatis MySQL CRUD</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap-ui.min.css" integrity="sha512-Le5SZRnS7S4ArmiYClxIKwWLrs9SoHPyh+oQG7zSBbvm0QQosIoKLW6w7etCry7JlH4Zg4Yr54rWcHf9tq741g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap4.min.css" integrity="sha512-plewgF+K5wG+M+GQlXSV2JeOAq+U2kDCXHSnIssBQ4KXwOfR82LcwB0EgJLc3WtagsE609WTSh2T8+f8xjCs5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap4.min.css" integrity="sha512-plewgF+K5wG+M+GQlXSV2JeOAq+U2kDCXHSnIssBQ4KXwOfR82LcwB0EgJLc3WtagsE609WTSh2T8+f8xjCs5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap5.min.css" integrity="sha512-UbVYeUFo4l/iwwpPVrjIqrnib3/I0URyStjN/5/Vrpp8nxVZyvkrL7ZXoneagBwXVhCqXgtlRQtF1nSl5bLqtg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/jquery.jqGrid.min.js" integrity="sha512-yPWyiZjg1ulWkaPiYyRTROUnGPK//B1ct+paU089gY8Grxm9WQrtZFSkT+kqLSbSuCesgUDpuj6dbLWUSRQvCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/i18n/grid.locale-en.min.js" integrity="sha512-4TZxmj5NUzpv+4W1Utt/9BDRkVgqzrLx5RIW9lyQbrt3DPrKckwgETuIKrzyOdJ1dE0VcJ5phtcrHWTMHtE2dA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.aria.min.js" integrity="sha512-5oEMMxtNPLZceX08U7DaI50opQRnxNggKhbilWnslWArSJ8j3HwukqAUtKKIkzrLJsoRptWNSC6wDMfycPLlew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.base.min.js" integrity="sha512-wyeWMEojC8xaIHbNWkb6Vlw6RkdPeJkipBdMp/LRm1n2ok0lnRxRkhtKXc73p+8dX0803D+l58/evzSETdQ03Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.celledit.min.js" integrity="sha512-ks8VIPGv2ODlVcaUpw7vWRkk3/sY1sQmXmyOGxzyr7dcm4flyEqHAfWG0y+XewwFaK0EBXaZpLKeQPa7qnvz0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.common.min.js" integrity="sha512-04PfNDfOKfTXkLvBMicaayd64Jk2CYyp27vIQGb6H/ZXWNmTEn2JX/BwgQOuluSlNWrwHvbutkn/Ldo/QFhLjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.export.min.js" integrity="sha512-VCD9EGBQQSD0jW++s8AeE0t39W+Sqi/1r+N7j8daavgwCU0+Hk2zG7tfhFK2ntuEfJOEw3GvlnASL26FUTYpaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.filter.min.js" integrity="sha512-ou99E/6dwJbJ7YJrUMq4+2Wemu1KJR/TE6B6tFEkG8FI6OnBRSYN6WIIEtxxD67q031AoDvRxxF8X/Sn1xX90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.formedit.min.js" integrity="sha512-hZ4dEphQP3zLFqlInR05UugwAzOTaPYpM2QfZvotpTVIlokGJ8gqD8nWmsRm+JplwtFysoiEe2u2wN6Y4odyGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.grouping.min.js" integrity="sha512-M+GPrFkOEni1pd+V727UTukwIYExbWzLUtURnuAjjUKbXhBjEh/immWfbA3l4OkgP/pdfRZ+x0vyFdYDyG1J9A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.import.min.js" integrity="sha512-hmc01V3FZ4gbPQz/HjfLrJ5GQrRbgfbjAYUb8HxQDjcyMEjc4UtVf7Eo5XiZDsEUnj2c5XQmFD8+t7R6dBetSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.jqueryui.min.js" integrity="sha512-d2h52wx/eae+jbdpTXgOhdib0TieAoJ7cxaQ4zVBYgUMTvukcmsorM1VKLXtehQPBaqaIxJII3TAfY00jmy8ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.pivot.min.js" integrity="sha512-GFXAU6rEEHiD4b6sDQ9AS3LnS+SoeFbTSNJHSKIJAoxiGSeuR3Mnqj6hP93/D/RUWB4KbitixVsuxVSuszGkBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.subgrid.min.js" integrity="sha512-97IztHg2UYeaiJ9DGSYkycnczBgnH6DnSiPs0uemfTK/gQTq0BEMNbc0MBPT6i8iha8LEJXC21/2qoFCPRdYAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.treegrid.min.js" integrity="sha512-+jjBfXOpkxyu43FnPTgTaZ/KQQWFHDvxt7LcjEPahiOPpWuC0Fripzu3VnWOm5CCWrTnsTHGrBb49KvH1eZozA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/grid.utils.min.js" integrity="sha512-bfKhXUu9Y6ZDqaJY8T34x4v1WIiBbM9Vu7xtz6ykjn1Qk9bzAyh0OnMOZvwHq64Fb2lmFdZf+rn4ZrVfm+kgDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/jqDnR.min.js" integrity="sha512-CfkPjYxYlBYaD+sxxgTLdpB2Y2AFQWCQ0lQKeA72XZF+yoEAc+rYK+V9O6uokCTTk+bILh3YJGfb9NpvGFzMaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/jqModal.min.js" integrity="sha512-9oIeh3Oz1js6mV6ofYlfmzzPnY9cB/fFX0uah9eNGNuS1dwIaoLSDqNjCV8afLMptfztOzNpRgLnA1QHgj0ORw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/jquery.fmatter.min.js" integrity="sha512-Rzaxf6X3gour+pq9iHYJgQn9c9vBwMToPhSf8HGPXGd04cExuFedRePxSbbXF/NptEO0zli5mgAHGE8vTSStXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/i18n/grid.locale-bg.min.js" integrity="sha512-qd/HcE0bm4Uamx6NGvk20GtnSdUJBSQUREefgkp/KERUr8D8YFnxUuOIH9DxmfVALVGvbqvu++bRSUl7q/SvRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        .container{
+            margin-top: 10px;
+            max-width: 750px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h4>User Registration</h4><br/>
+    <h5>User List</h5>
+    <table id="list">
+                <tr>
+                        <td/>
+                </tr>
+        </table>
+</div>
+</body>
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("#list").jqGrid({
+                url : "loadUser",
+                datatype : "json",
+                mtype : 'GET',
+                colNames : [ 'First Name','Last Name','Phone Number'],
+                colModel : [ {
+                        name : 'firstName',
+                        index : 'firstName',
+                        width : 250
+                }, {
+                        name : 'lastName',
+                        index : 'lastName',
+                        width : 250,
+                        editable : true
+                }, {
+                        name : 'mobilePhone',
+                        index : 'mobilePhone',
+                        width : 190,
+                        editable : false
+                }],
+                pager : '#pager',
+                rowNum : 10,
+                height: 'auto',
+                rowList : [ 10 ],
+                sortname : 'firstName',
+                sortorder : 'desc',
+                viewrecords : true,
+                gridview : true,
+                multiselect: true,
+            multiboxonly: false,
+                caption : 'User Registration',
+                jsonReader : {
+                        repeatitems : false,
+                }
+        });
+        jQuery("#list").jqGrid('navGrid', '#pager', {
+                edit : false,
+                add : false,
+                del : false,
+                search : false
+        });
+         
+         
+        $('#showSelected').on('click',function(){
+          
+         var selRowArr = jQuery("#list").getGridParam('selarrrow');
+         var selectedAppIds = [];
+         for(var i=0;i<selRowArr.length;i++){
+          var celValue =  $('#list').jqGrid('getCell', selRowArr[i], 'firstName');
+          selectedAppIds.push(celValue);
+         }
+         alert(selectedAppIds);
+         $('#list').trigger( 'reloadGrid' );
+          
+    
+        });
+  
+ });
+
+</script>
+</html>

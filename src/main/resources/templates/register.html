@@ -1,0 +1,44 @@
+<!Doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MyBatis MySQL CRUD</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap-ui.min.css" integrity="sha512-Le5SZRnS7S4ArmiYClxIKwWLrs9SoHPyh+oQG7zSBbvm0QQosIoKLW6w7etCry7JlH4Zg4Yr54rWcHf9tq741g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/css/ui.jqgrid-bootstrap4.min.css" integrity="sha512-plewgF+K5wG+M+GQlXSV2JeOAq+U2kDCXHSnIssBQ4KXwOfR82LcwB0EgJLc3WtagsE609WTSh2T8+f8xjCs5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/jquery.jqGrid.min.js" integrity="sha512-yPWyiZjg1ulWkaPiYyRTROUnGPK//B1ct+paU089gY8Grxm9WQrtZFSkT+kqLSbSuCesgUDpuj6dbLWUSRQvCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.6.0/js/i18n/grid.locale-en.min.js" integrity="sha512-4TZxmj5NUzpv+4W1Utt/9BDRkVgqzrLx5RIW9lyQbrt3DPrKckwgETuIKrzyOdJ1dE0VcJ5phtcrHWTMHtE2dA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        .container{
+            margin-top: 10px;
+            max-width: 750px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h4>User Registration</h4><br/>
+    <form action="insert-user"  method="post">
+        First Name:<br/>
+        <input type="text" class="form-control" name="firstName"/>
+        <br/>
+        Last Name:<br/>
+        <input type="text" class="form-control" name="lastName"/>
+        <br/>
+        Phone Number:<br/>
+        <input type="text" class="form-control" name="mobilePhone"/>
+        <br/>
+        password:<br/>
+        <input type="password" class="form-control" name="password"/>
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
